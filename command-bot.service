@@ -1,0 +1,16 @@
+[Unit]
+Description=Command Bot Service
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+WorkingDirectory=/opt/command-bot
+ExecStart=/opt/command-bot/command-bot-service
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
