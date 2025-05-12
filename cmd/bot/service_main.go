@@ -29,6 +29,11 @@ func main() {
 
 	pingCmd := commands.NewPingCommand()
 	echoCmd := commands.NewEchoCommand()
+	timeCmd := commands.NewTimeCommand()
+	randomCmd := commands.NewRandomCommand()
+	weatherCmd := commands.NewWeatherCommand()
+	calcCmd := commands.NewCalcCommand()
+	quoteCmd := commands.NewQuoteCommand()
 
 	if err := handler.RegisterCommand(pingCmd); err != nil {
 		log.Fatalf("Failed to register ping command: %v", err)
@@ -38,12 +43,32 @@ func main() {
 		log.Fatalf("Failed to register echo command: %v", err)
 	}
 
+	if err := handler.RegisterCommand(timeCmd); err != nil {
+		log.Fatalf("Failed to register time command: %v", err)
+	}
+
+	if err := handler.RegisterCommand(randomCmd); err != nil {
+		log.Fatalf("Failed to register random command: %v", err)
+	}
+
+	if err := handler.RegisterCommand(weatherCmd); err != nil {
+		log.Fatalf("Failed to register weather command: %v", err)
+	}
+
+	if err := handler.RegisterCommand(calcCmd); err != nil {
+		log.Fatalf("Failed to register calc command: %v", err)
+	}
+
+	if err := handler.RegisterCommand(quoteCmd); err != nil {
+		log.Fatalf("Failed to register quote command: %v", err)
+	}
+
 	helpCmd := commands.NewHelpCommand(handler)
 	if err := handler.RegisterCommand(helpCmd); err != nil {
 		log.Fatalf("Failed to register help command: %v", err)
 	}
 
-	log.Println("Command Bot service started. Registered commands: ping, echo, help")
+	log.Println("Command Bot service started. Registered commands: ping, echo, time, random, weather, calc, quote, help")
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
